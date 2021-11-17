@@ -1,7 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const bcrypt = require('bcryptjs');
-const auth = require('../../middleware/auth');
+const userauth = require('../../middleware/userauth');
+const streamerauth = require('../../middleware/streamerauth');
 const jwt = require('jsonwebtoken');
 const config = require('../../config/default');
 const { check, validationResult } = require('express-validator');
@@ -12,7 +13,7 @@ const Streamer = require('../../models/Streamer');
 // @route    GET api/auth/user
 // @desc     Get user by token
 // @access   Private
-router.get('/user', auth, async (req, res) => {
+router.get('/user', userauth, async (req, res) => {
     try {
       const user = await User.findById(req.user.id).select('-password');
       res.json(user);
@@ -25,7 +26,7 @@ router.get('/user', auth, async (req, res) => {
 // @route    GET api/auth/streamer
 // @desc     Get streamer by token
 // @access   Private
-router.get('/streamer', auth, async (req, res) => {
+router.get('/streamer', streamerauth, async (req, res) => {
     try {
       const streamer = await Streamer.findById(req.streamer.id).select('-password');
       res.json(streamer);
