@@ -9,6 +9,32 @@ const { check, validationResult } = require('express-validator');
 const User = require('../../models/User');
 const Streamer = require('../../models/Streamer');
 
+// @route    GET api/auth/user
+// @desc     Get user by token
+// @access   Private
+router.get('/user', auth, async (req, res) => {
+    try {
+      const user = await User.findById(req.user.id).select('-password');
+      res.json(user);
+    } catch (err) {
+      console.error(err.message);
+      res.status(500).send('Server Error');
+    }
+});
+
+// @route    GET api/auth/streamer
+// @desc     Get streamer by token
+// @access   Private
+router.get('/streamer', auth, async (req, res) => {
+    try {
+      const streamer = await Streamer.findById(req.streamer.id).select('-password');
+      res.json(streamer);
+    } catch (err) {
+      console.error(err.message);
+      res.status(500).send('Server Error');
+    }
+});
+  
 // @route    POST api/auth/user
 // @desc     Authenticate user & get token
 // @access   Public
