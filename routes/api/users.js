@@ -12,11 +12,12 @@ const User = require('../../models/User');
 // @access   Public
 router.post(
   '/',
-  check('name', 'Name is required').notEmpty(),
+  check('firstname', 'First Name is required').notEmpty(),
+  check('lastname', 'Last Name is required').notEmpty(),
   check('email', 'Please include a valid email').isEmail(),
   check('password','Please enter a password with 6 or more characters').isLength({ min: 6 }),
   check('phonenumber', 'PhoneNumber is required').notEmpty(),
-  check('bio', 'Please enter a Biology with 100 or more characters').isLength({ min: 100 }),
+  check('biography', 'Please enter a Biology with 100 or more characters').isLength({ min: 100 }),
   
   async (req, res) => {
 
@@ -26,7 +27,7 @@ router.post(
     }
 
 
-    const { name, email, password, phonenumber, bio } = req.body;
+    const { firstname, lastname, email, password, phonenumber, biography } = req.body;
 
     try {
       let user = await User.findOne({ email });
@@ -38,11 +39,12 @@ router.post(
       }
       
       user = new User({
-        name,
+        firstname,
+        lastname,
         email,
         password,
         phonenumber,
-        bio
+        biography
       });
 
       const salt = await bcrypt.genSalt(10);

@@ -47,7 +47,7 @@ const StreamerSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-  bio: {
+  biography: {
     type: String,
     minlength: 100
   }

@@ -8,7 +8,7 @@ const { check, validationResult } = require('express-validator');
 const User = require('../../models/Streamer');
 const Streamer = require('../../models/Streamer');
 
-// @route    POST api/streamer
+// @route    POST api/streamers
 // @desc     Register streamer
 // @access   Public
 router.post(
@@ -19,17 +19,18 @@ router.post(
   check('email', 'Please include a valid email').isEmail(),
   check('password', 'Please enter a password with 6 or more characters').isLength({ min: 6 }),
   check('phonenumber', 'PhoneNumber is required').notEmpty(),
-  check('birthday', 'Please include a valid date').isDate(),
+  //check('birthday', 'Please include a valid date').isDate(),
   check('country', 'Country is required').notEmpty(),
   check('gender', 'Gender is required').notEmpty(),
-  check('bio', 'Please enter a Biology with 100 or more characters').isLength({ min: 100 }),
+  check('biography', 'Please enter a Biology with 100 or more characters').isLength({ min: 100 }),
   async (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
       return res.status(400).json({ errors: errors.array() });
     }
 
-    const { firstname, lastname, nickname, email, password, phonenumber, birthday, country, address, zipcode, gender, bio} = req.body;
+    console.log(req.body);
+    const { firstname, lastname, nickname, email, password, profileimage, phonenumber, birthday, country, address, zipcode, gender, biography} = req.body;
 
     try {
       let streamer = await Streamer.findOne({ email });
@@ -46,13 +47,14 @@ router.post(
         nickname,
         email,
         password,
+        profileimage,
         phonenumber,
         birthday,
         country, 
         address, 
         zipcode, 
         gender, 
-        bio
+        biography
       });
 
       const salt = await bcrypt.genSalt(10);
