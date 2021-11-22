@@ -19,7 +19,7 @@ router.post(
   check('email', 'Please include a valid email').isEmail(),
   check('password', 'Please enter a password with 6 or more characters').isLength({ min: 6 }),
   check('phonenumber', 'PhoneNumber is required').notEmpty(),
-  //check('birthday', 'Please include a valid date').isDate(),
+  check('birthday', 'Please include a valid date').isDate(),
   check('country', 'Country is required').notEmpty(),
   check('gender', 'Gender is required').notEmpty(),
   check('biography', 'Please enter a Biology with 100 or more characters').isLength({ min: 100 }),

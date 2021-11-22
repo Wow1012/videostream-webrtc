@@ -1,8 +1,10 @@
 const express = require('express');
 const connectDB = require('./config/db');
 const path = require('path');
+const cors = require("cors");
 
 const app = express();
+app.use(cors());
 
 // Connect Database
 connectDB();
@@ -15,6 +17,10 @@ app.use(express.urlencoded({extended: true}));
 app.use('/api/users', require('./routes/api/users'));
 app.use('/api/streamers', require('./routes/api/streamers'));
 app.use('/api/auth', require('./routes/api/auth'));
+app.use('/api/upload', require('./routes/api/upload'));
+
+//SERVING IMAGES
+app.use('/images', express.static('images'));
 
 // Serve static assets in production
 if (process.env.NODE_ENV === 'production') {
