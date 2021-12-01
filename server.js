@@ -18,6 +18,7 @@ app.use('/api/users', require('./routes/api/users'));
 app.use('/api/streamers', require('./routes/api/streamers'));
 app.use('/api/auth', require('./routes/api/auth'));
 app.use('/api/upload', require('./routes/api/upload'));
+app.use('/api/broadcasters', require('./routes/api/broadcasters'));
 
 //SERVING IMAGES
 app.use('/images', express.static('images'));
@@ -32,6 +33,14 @@ if (process.env.NODE_ENV === 'production') {
   });
 }
 
+
+const Broadcaster = require('./models/Broadcaster');
+
+
+
 const PORT = process.env.PORT || 5000;
 
-app.listen(PORT, () => console.log(`Server started on port ${PORT}`));
+app.listen(PORT, async () => {
+  console.log(`Server started on port ${PORT}`);
+  await Broadcaster.deleteMany();
+});

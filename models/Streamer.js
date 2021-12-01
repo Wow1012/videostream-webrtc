@@ -44,8 +44,7 @@ const StreamerSchema = new mongoose.Schema({
     type: String
   },
   gender: {
-    type: String,
-    required: true
+    type: String
   },
   biography: {
     type: String,

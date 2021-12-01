@@ -21,8 +21,6 @@ router.post(
   check('phonenumber', 'PhoneNumber is required').notEmpty(),
   check('birthday', 'Please include a valid date').isDate(),
   check('country', 'Country is required').notEmpty(),
-  check('gender', 'Gender is required').notEmpty(),
-  check('biography', 'Please enter a Biology with 100 or more characters').isLength({ min: 100 }),
   async (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
@@ -30,7 +28,7 @@ router.post(
     }
 
     console.log(req.body);
-    const { firstname, lastname, nickname, email, password, profileimage, phonenumber, birthday, country, address, zipcode, gender, biography} = req.body;
+    const { firstname, lastname, nickname, email, password, phonenumber, birthday, country, address, zipcode} = req.body;
 
     try {
       let streamer = await Streamer.findOne({ email });
@@ -47,14 +45,11 @@ router.post(
         nickname,
         email,
         password,
-        profileimage,
         phonenumber,
         birthday,
         country, 
         address, 
-        zipcode, 
-        gender, 
-        biography
+        zipcode
       });
 
       const salt = await bcrypt.genSalt(10);
