@@ -9,21 +9,24 @@ const { addUser, getUser, deleteUser, getUsers } = require('./user')
 
 app.use(cors());
 
-let broadcaster
+let broadcasters = {};
+let broadcaster;
 
 io.on('connection', socket => {
 
     console.log("CLIENT CONNECTED", socket.id);
 
     //VIDEO BROADCATING
-    socket.on("broadcaster", () => {
+    socket.on("broadcaster", ({room}) => {
+        broadcasters[room]=socket.id;
+        console.log(broadcasters, room, socket.id,);
         broadcaster = socket.id;
         socket.broadcast.emit("broadcaster");
-        console.log(`Broadcaster ${broadcaster} Connect`);
+        console.log(`Broadcaster ${broadcasters[room]} Connect`);
     });
 
-    socket.on("watcher", () => {
-        socket.to(broadcaster).emit("watcher", socket.id);
+    socket.on("watcher", (room) => {
+        socket.to(broadcasters[room]).emit("watcher", socket.id);
     })
 
     socket.on("disconnect", () => {

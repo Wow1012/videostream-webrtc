@@ -19,8 +19,10 @@ app.use('/api/streamers', require('./routes/api/streamers'));
 app.use('/api/auth', require('./routes/api/auth'));
 app.use('/api/upload', require('./routes/api/upload'));
 app.use('/api/broadcasters', require('./routes/api/broadcasters'));
+app.use('/api/setting', require('./routes/api/setting'));
 
 //SERVING IMAGES
+app.use('/logo', express.static('logo'));
 app.use('/images', express.static('images'));
 
 // Serve static assets in production
