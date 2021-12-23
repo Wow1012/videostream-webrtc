@@ -1,56 +1,59 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
 const StreamerSchema = new mongoose.Schema({
   firstname: {
     type: String,
-    required: true
+    required: true,
   },
   lastname: {
     type: String,
-    required: true
+    required: true,
   },
   nickname: {
     type: String,
-    required: true
+    required: true,
   },
   email: {
     type: String,
     required: true,
-    unique: true
+    unique: true,
   },
   password: {
     type: String,
-    required: true
+    required: true,
   },
   profileimage: {
-    type: String
+    type: String,
   },
   phonenumber: {
     type: String,
-    required: true
+    required: true,
   },
   birthday: {
-      type: Date,
-      required: true
+    type: Date,
+    required: true,
   },
   country: {
     type: String,
-    required: true
+    required: true,
   },
   address: {
-    type: String
+    type: String,
   },
   zipcode: {
-    type: String
+    type: String,
   },
   gender: {
-    type: String
+    type: String,
   },
   biography: {
     type: String,
-    minlength: 100
-  }
-
+    minlength: 100,
+  },
+  verification: {
+    type: Number,
+    default: 0,
+  },
 });
 
-module.exports = mongoose.model('streamer', StreamerSchema);
+module.exports = mongoose.model("streamer", StreamerSchema);

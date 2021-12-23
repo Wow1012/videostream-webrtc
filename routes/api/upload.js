@@ -202,4 +202,11 @@ router.post(
   }
 );
 
+router.get("/fileadd/:streamer_id", async (req, res) => {
+  let files = await Upload.find({ streamer: req.params.streamer_id }).exec();
+  console.log(files);
+
+  res.json(files);
+});
+
 module.exports = router;

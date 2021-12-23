@@ -11,6 +11,9 @@ const BroadcasterSchema = new mongoose.Schema({
   profileimage: {
     type: String
   },
+  gender: {
+    type: String
+  },
 });
 
 module.exports = mongoose.model('broadcaster', BroadcasterSchema);

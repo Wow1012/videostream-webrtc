@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
 const SettingSchema = new mongoose.Schema({
   logo: {
@@ -6,6 +6,12 @@ const SettingSchema = new mongoose.Schema({
   },
   genders: {
     type: Array,
+  },
+  about: {
+    type: String,
+  },
+  contact: {
+    type: String,
   },
   theme: {
     type: Array,
@@ -18,4 +24,4 @@ const SettingSchema = new mongoose.Schema({
   },
 });
 
-module.exports = mongoose.model('setting', SettingSchema);
+module.exports = mongoose.model("setting", SettingSchema);

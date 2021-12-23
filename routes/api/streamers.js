@@ -5,7 +5,6 @@ const jwt = require("jsonwebtoken");
 const config = require("../../config/default");
 const { check, validationResult } = require("express-validator");
 
-const User = require("../../models/Streamer");
 const Streamer = require("../../models/Streamer");
 
 // @route    POST api/streamers
@@ -109,5 +108,17 @@ router.post(
     res.json(streamer);
   }
 );
+
+// @route    POST api/streamers/verification/:streamer_id
+// @desc     Require Verification
+// @access   Public
+router.post("/verification/:streamer_id", async (req, res) => {
+  const streamer = await Streamer.findOneAndUpdate(
+    { _id: req.params.streamer_id },
+    { verification: 1 },
+    { new: true }
+  );
+  res.json("success");
+});
 
 module.exports = router;

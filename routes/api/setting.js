@@ -14,4 +14,14 @@ router.get("/menu", async (req, res) => {
   res.json(gender);
 });
 
+router.get("/about", async (req, res) => {
+  const about = await Setting.findOne({}, {}).select("about");
+  res.json(about);
+});
+
+router.get("/contact", async (req, res) => {
+  const contact = await Setting.findOne({}, {}).select("contact");
+  res.json(contact);
+});
+
 module.exports = router;

@@ -68,10 +68,15 @@ app.use("/api/auth", require("./routes/api/auth"));
 app.use("/api/upload", require("./routes/api/upload"));
 app.use("/api/broadcasters", require("./routes/api/broadcasters"));
 app.use("/api/setting", require("./routes/api/setting"));
+app.use("/api/watchingtime", require("./routes/api/watchingtime"));
+app.use("/api/videopay", require("./routes/api/videopay"));
+app.use("/api/detailedpay", require("./routes/api/detailedpay"));
+app.use("/api/payment", require("./routes/api/payment"));
 
 //SERVING IMAGES
 app.use("/logo", express.static("logo"));
 app.use("/images", express.static("images"));
+app.use("/upload", express.static("upload"));
 
 // Serve static assets in production
 if (process.env.NODE_ENV === "production") {
